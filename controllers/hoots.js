@@ -11,3 +11,25 @@ router.get("/", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+router.put("/:hootId", async (req, res) => {
+  try {
+    const hoot = await Hoot.findById(req.params.hootId);
+
+    if (!hoot.author.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!");
+    }
+
+    const updatedHoot = await Hoot.findByIdAndUpdate(
+      req.params.hootId,
+      req.body,
+      { new: true }
+    );
+
+    updatedHoot._doc.author = req.user;
+
+    res.status(200).json(updatedHoot);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
