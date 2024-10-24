@@ -1,4 +1,16 @@
-import mongoose from "mongoose";
+const mongoose = require ('mongoose');
+
+const commentSchema = new mongoose.Schema(
+    {
+        text: {
+            type: String,
+            required: true,
+        },
+        author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    },
+    { timestamps: true }
+);
+
 
 const hootSchema = new mongoose.Schema(
   {
@@ -25,15 +37,11 @@ const hootSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const commentSchema = new mongoose.Schema(
-  {
-    text: {
-      type: String,
-      required: true,
-    },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  },
-  { timestamps: true }
-);
+const Comment = mongoose.model('Comment', commentSchema);
 
-export const Hoot = mongoose.model("Hoot", hootSchema);
+// This shouldnt wok unless we use typescript or set the type of project to module, but we do that only if we know what
+// we are doing bc that breaks a bunch of stuff
+// export const Hoot = mongoose.model("Hoot", hootSchema);
+
+
+module.exports= mongoose.model("Hoot", hootSchema);
