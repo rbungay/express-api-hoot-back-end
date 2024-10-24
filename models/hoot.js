@@ -36,4 +36,4 @@ const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Hoot = mongoose.model("Hoot", hootSchema);
+modules.export = mongoose.model("Hoot", hootSchema);

@@ -19,9 +19,9 @@ app.use(express.json());
 
 // Routes go here
 app.use("/test-jwt", testJWTRouter);
-app.use("/users", usersRouter);
-app.use("/profiles", profilesRouter);
-app.use("/hoots", hootsRouter);
+app.use("/users", usersRouter); // Manny
+app.use("/profiles", profilesRouter); // Paola
+app.use("/hoots", hootsRouter); // Rani
 
 app.listen(3000, () => {
   console.log("The express app is ready!");
